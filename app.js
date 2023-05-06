@@ -1,15 +1,20 @@
 const express = require('express');
+const cookieParser = require("cookie-parser");
+const postsRouter = require('./routes/posts.js')
+const commentsRouter = require('./routes/comments.js')
+const usersRouter = require('./routes/user.js')
+const authRouter = require('./routes/auth.js')
+const connect = require("./schemas");
+
 const app = express();
 const port = 3000;
 
-const postsRouter = require('./routes/posts.js')
-const commentsRouter = require('./routes/comments.js')
-const connect = require("./schemas");
+
 connect();
 
-
 app.use(express.json());
-app.use("/api", [postsRouter, commentsRouter]);
+app.use(cookieParser());
+app.use("/api", [postsRouter, commentsRouter, usersRouter, authRouter]);
 
 
 app.get('/', (req, res) => {

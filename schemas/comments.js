@@ -10,21 +10,26 @@ const commentsSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  user: {
+  userId: {
+    type: String,
+    required: true,
+  },
+  nickname: {
     type: String,
     required: true,
   },
   content: {
     type: String,
-    required: true,
   },
   password: {
     type: String,
-    required: true,
   },
   createdAt: {
     type: Date
-  }
+  },
+  updatedAt: {
+    type: Date,
+  },
 });
 
 module.exports = mongoose.model("Comments", commentsSchema);
