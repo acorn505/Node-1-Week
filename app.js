@@ -1,26 +1,28 @@
-const express = require('express');
-const cookieParser = require("cookie-parser");
-const postsRouter = require('./routes/posts.js')
-const commentsRouter = require('./routes/comments.js')
-const usersRouter = require('./routes/user.js')
-const authRouter = require('./routes/auth.js')
-const connect = require("./schemas");
-
-const app = express();
-const port = 3000;
 
 
-connect();
+ const express = require('express');
+ const cookieParser = require("cookie-parser");
+ const postsRouter = require('./routes/posts.js')
+ const commentsRouter = require('./routes/comments.js')
+ const usersRouter = require('./routes/users.js')
+ const authRouter = require('./routes/auth.js')
+ const connect = require("./schemas");
 
-app.use(express.json());
-app.use(cookieParser());
-app.use("/api", [postsRouter, commentsRouter, usersRouter, authRouter]);
+ const app = express();
+ const port = 3000;
 
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+ connect();
 
-app.listen(port, () => {
+ app.use(express.json());
+ app.use(cookieParser());
+ app.use("/api", [postsRouter, commentsRouter, usersRouter, authRouter]);
+
+
+ app.get('/', (req, res) => {
+   res.send('Hello World!');
+   });
+
+ app.listen(port, () => {
   console.log(port, '포트로 서버가 열렸어요!');
-});
+ });

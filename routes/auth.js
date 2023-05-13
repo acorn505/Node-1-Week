@@ -3,14 +3,13 @@
 const jwt = require("jsonwebtoken");
 const express = require("express");
 const router = express.Router();
-
-const User = require("../schemas/user");
+const {users} = require("../models");
 
 // 로그인 API
 router.post("/login", async (req, res) => {
   const { nickname, password } = req.body;
 
-  const user = await User.findOne({nickname});
+  const user = await users.findOne({nickname});
   console.log(user)
 
   // NOTE: 인증 메세지는 자세히 설명하지 않는것을 원칙으로 한다.
@@ -33,7 +32,7 @@ router.post("/login", async (req, res) => {
     "custom-secret-key",
   );
 
-  res.cookie("Authorization", `Bearer ${token}`); // JWT를 Cookie로 할당합니다!
+  res.cookie("authorization", `Bearer ${token}`); // JWT를 Cookie로 할당합니다!
   res.status(200).json({ "token" : token }); // JWT를 Body로 할당합니다!
 });
 
